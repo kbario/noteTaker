@@ -22,18 +22,10 @@ app.get('/notes', (req, res) => {
     res.sendFile(__dirname + '/public/notes.html')
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html')
-})
 // notes
 app.get('/api/notes', (req, res) => {
     const dbs = JSON.parse(fs.readFileSync(__dirname + '/db/db.json', 'utf-8'));
-    const response = {
-        status: 'success',
-        body: dbs
-    };
-    console.log(response);
-    res.status(200).json(response);
+    res.json(dbs)
 });
 
 app.post('/api/notes', (req, res) => {
@@ -56,6 +48,23 @@ app.post('/api/notes', (req, res) => {
     res.status(201).json(response);
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    // get the id
+    const id2Go = req.params.id;
+    // read db
+    const dbs = JSON.parse(fs.readFileSync(__dirname + '/db/db.json', 'utf-8'));
+    // for each
+    const newDb = dbs.filter(element => {
+        return element.id !== id2Go
+    });
+    fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(newDb));
+    res.status(201).json(newDb)
+});
+
+// this always comes last just before listen
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html')
+})
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
