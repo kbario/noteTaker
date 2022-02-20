@@ -9,7 +9,7 @@ const { v4 } = require("uuid");
 const app = express();
 
 // define port
-const PORT = 3001
+const PORT = process.env.PORT || 5000;
 
 // define middleware
 app.use(express.static('public'));
