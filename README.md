@@ -19,9 +19,6 @@ From developing noteTaker, I have developed greater skills in back-end developem
 noteTaker was created with JavaScript, Node.js and Express.js.
 
 ## Table of Contents
-- [noteTaker](#notetaker)
-  - [Description](#description)
-  - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Using noteTaker](#using-notetaker)
